@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Table Example</title>
+	<style>
+        input[type="text"], button {
+        text-align: center;
+        }
+        table {
+  border-collapse: collapse;
+  margin: 0 auto;
+  margin-bottom: 20px;
+  border-radius: 10px;
+}
+		th, td {
+			border: 1px solid black;
+			padding: 10px;
+		}
+
+		input[type="checkbox"] {
+			transform: scale(1.5);
+		}
+
+		input[type="text"] {
+			padding: 5px;
+			border: none;
+			border-radius: 3px;
+			font-size: 16px;
+		}
+        .activity-input {
+            height: 30px;
+        }
+		.add-btn {
+			height: 40px;
+			padding: 10px;
+			border: none;
+			border-radius: 5px;
+			background-color: #007bff;
+			color: #fff;
+			font-size: 16px;
+			cursor: pointer;
+		}
+
+		.add-btn:hover {
+			background-color: #0056b3;
+		}
+        html, body {
+            height: 100%;
+        }
+		body {
+			font-family: "Arial", sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+		}
+
+		.calendar {
+			text-align: center;
+
+		}
+
+		.add-activity {
+			text-align: center;
+		}
+        input[type="text"], button, table {
+        border-radius: 5px;
+        }
+		/* Media queries for responsive design */
+		@media screen and (max-width: 600px) {
+			th, td {
+				padding: 5px;
+			}
+
+			input[type="text"] {
+				width: 100%;
+			}
+		}
+	</style>
+	<script type="text/javascript">
+		function addRow() {
+			// Find the table body element
+			var tableBody = document.getElementById("table-body");
+
+			// Create a new row and cells
+			var newRow = tableBody.insertRow(-1);
+			var activityCell = newRow.insertCell(0);
+			var cells = [];
+
+			// Create a cell with a checkbox for each day of the week
+			for (var i = 0; i < 7; i++) {
+				cells[i] = newRow.insertCell(i+1);
+				var checkbox = document.createElement("input");
+				checkbox.type = "checkbox";
+				cells[i].appendChild(checkbox);
+			}
+
+			// Get the default value from the input field
+			var defaultValue = document.getElementById("activity-name").value.trim();
+
+			// Set default value to "New Activity" if the value is empty or only spaces
+			if (defaultValue === "") {
+				defaultValue = "New Activity";
+			}
+
+			// Create a new input field for the activity and set its value to the default value
+			var activityInput = document.createElement("input");
+			activityInput.type = "text";
+			activityInput.value = defaultValue;
+			activityCell.appendChild(activityInput);
+
+			// Clear the default value input field
+			document.getElementById("activity-name").value = "";
+		}
+	</script>
+</head>
+<body>
+	<div class="calendar">
+		<h1>Weekly Schedule</h1>
+        <div class="table">
+		<table>
+			<thead>
+				<tr>
+					<th>Activity</th>
+					<th>Monday</th>
+					<th>Tuesday</th>
+					<th>Wednesday</th>
+					<th>Thursday</th>
+					<th>Friday</th>
+					<th>Saturday</th>
+					<th>Sunday</th>
+				</tr>
+			</thead>
+            <tbody id="table-body">
+                <tr class="row">
+                    <td class="activity-name"><input type="text" value="First activity"></td>
+                    <td class="checkbox-container"><input type="checkbox" class="checkbox"></td>
+                    <td class="checkbox-container"><input type="checkbox" class="checkbox"></td>
+                    <td class="checkbox-container"><input type="checkbox" class="checkbox"></td>
+                    <td class="checkbox-container"><input type="checkbox" class="checkbox"></td>
+                    <td class="checkbox-container"><input type="checkbox" class="checkbox"></td>
+                    <td class="checkbox-container"><input type="checkbox" class="checkbox"></td>
+                    <td class="checkbox-container"><input type="checkbox" class="checkbox"></td>
+                </tr>
+            </tbody>
+            </table>
+            <div class="add-activity">
+                <input type="text" class="activity-input" id="activity-name" placeholder="New Activity Name">
+                <button class="add-btn" onclick="addRow()">Create</button>
+            </div>
+            </body>
+            </html>
